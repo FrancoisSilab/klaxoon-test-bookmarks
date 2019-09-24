@@ -1,0 +1,37 @@
+.listItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #000;
+
+    &-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    &-origins {
+        p:first-child {
+            font-weight: bold;
+        }
+
+        p:last-child {
+            color: #999;
+        }
+    }
+
+    &-url {
+        color: navy;
+        max-width: 40vw;
+        overflow-x: hidden;
+        overflow-wrap: no-wrap;
+        text-overflow: ellipsis;
+    }
+    &-url:hover {
+        text-decoration: underline;
+    }
+}
+
+.listItem:first-child {
+    border-top: 1px solid #000; 
+}
