@@ -21,18 +21,22 @@ const inputReducer = (state = INITIAL_STATE, action) => {
         hidden: action.payload
       };
     case InputActionsTypes.UPDATE_INPUT:
-      const data = {}
+      const data = {};
       for (let [key, value] of Object.entries(state.inputStatesValues)) {
-        console.log(`${key}: ${value}`);
-        if(action.payload.name === key) {
+        if (action.payload.name === key) {
           data[key] = action.payload.value;
         } else {
-          data[key] = "";
+          data[key] = state.inputStatesValues[key];
         }
       }
       return {
         ...state,
-        inputStatesValues: data,
+        inputStatesValues: data
+      };
+    case InputActionsTypes.RESET_INPUT:
+      return {
+        ...state,
+        inputStatesValues: INITIAL_STATE.inputStatesValues
       };
     default:
       return state;

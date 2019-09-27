@@ -11,22 +11,33 @@ import {
   selectDurationVisibility,
   selectInputStatesValues
 } from "../../redux/input/input.selectors.js";
-import { toggleVisibility, updateInput } from "../../redux/input/input.actions.js";
+import { selectLinksItems } from "../../redux/links/links.selectors.js";
+import { toggleVisibility, updateInput, resetInput } from "../../redux/input/input.actions.js";
+import { addLinkItem } from "../../redux/links/links.utils.js";
+
 
 const AddLinkForm = ({
-  handleSubmit,
   hidden,
+  linksItem,
   inputValues,
   toggleVisibility,
-  updateInput
+  updateInput,
+  addLinkItem,
+  resetInput,
 }) => {
-  console.log(inputValues);
   const { url, title, author, date, width, height, duration } = inputValues;
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(linksItem);
+    console.log(inputValues);
+    addLinkItem(linksItem, inputValues);
+    resetInput();
+  };
+
 
   const handleChange = event => {
     const { value, name } = event.target;
-    console.log(value);
-    console.log(name);
     // Mise a jours du state correspondant à la value de chaque input au onChange
     const data = {
       name,
@@ -117,12 +128,15 @@ const AddLinkForm = ({
 
 const mapDispatchToProps = dispatch => ({
   toggleVisibility: visibility => dispatch(toggleVisibility(visibility)),
-  updateInput: data => dispatch(updateInput(data))
+  addLinkItem: (linksItems, link) => dispatch(addLinkItem(linksItems, link)),
+  updateInput: data => dispatch(updateInput(data)),
+  resetInput: () => dispatch(resetInput()),
 });
 
 const mapStateToProps = state =>
   createStructuredSelector({
     hidden: selectDurationVisibility,
+    linksItem: selectLinksItems,
     inputValues: selectInputStatesValues
   });
 
