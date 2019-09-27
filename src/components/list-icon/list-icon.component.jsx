@@ -5,13 +5,14 @@ import './list-icon.styles.scss';
 const LinkIcon = ({
     code,
     edit,
-    erase
+    erase,
+    handleClick
 }) => (
-    <span className={`${edit ? "listInfo-edit" : ""} ${
+    <button className={`${edit ? "listInfo-edit" : ""} ${
         erase ? "listInfo-delete" : ""
-      }`}>
+      }`} onClick={handleClick}>
       {code}
-    </span>
+    </button>
 );
 
 export default LinkIcon;

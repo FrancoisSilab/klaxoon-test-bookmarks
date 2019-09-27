@@ -1,9 +1,15 @@
 .listInfo- {
-    &delete {
-        color: red;
-    }
+  &delete {
+    padding: 0 10px;
+    width: 5vw;
+    color: red;
+    cursor: pointer;
+  }
 
-    &edit {
-        color: blue;
-    }
+  &edit {
+    padding: 0 10px;
+    width: 5vw;
+    color: blue;
+    cursor: pointer;
+  }
 }

@@ -6,11 +6,18 @@
     border-bottom: 1px solid #000;
 
     &-title {
+        padding: 0 10px;
         font-size: 16px;
         font-weight: bold;
+        width: 20vw;
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;    
     }
 
     &-origins {
+        padding: 0 10px;
+        width: 15vw;
         p:first-child {
             font-weight: bold;
         }
@@ -21,10 +28,11 @@
     }
 
     &-url {
+        padding: 0 10px;
         color: navy;
-        max-width: 40vw;
+        width: 40vw;
         overflow-x: hidden;
-        overflow-wrap: no-wrap;
+        white-space: nowrap;
         text-overflow: ellipsis;
     }
     &-url:hover {

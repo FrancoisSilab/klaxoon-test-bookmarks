@@ -1,8 +1,13 @@
 import { createSelector } from "reselect";
 
-const selectLink = state => state.link;
+const selectLink = state => state.links;
 
 export const selectLinksItems = createSelector(
     [selectLink],
-    link => link.LinkItems,
+    links => links.linksItems,
+  );
+
+  export const selectLinksItemsFromId = linkId => createSelector(
+    [selectLink],
+    links => links.linksItems.filter(link => link.id === linkId),
   );

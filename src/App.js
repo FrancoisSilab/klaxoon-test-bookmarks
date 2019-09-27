@@ -6,23 +6,28 @@ import "./App.css";
 import HomePage from "./pages/homepage/homepage.component.jsx";
 import AddLinkPage from "./pages/add-link-page/add-link-page.component.jsx";
 
+
+
 import Header from './components/header/header.component.jsx';
 
 class App extends React.Component {
+
+
 
   render() {
     return (
       <div>
         <Header></Header>
+        <main className="pages">
         <Switch>
-          <main className="pages">
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/add-link" component={AddLinkPage} />
-          </main>
+            <Route path="/add-link" component={AddLinkPage} />
         </Switch>
+        </main>
       </div>
     );
   }
 }
+
 
 export default App;

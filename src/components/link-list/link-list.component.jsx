@@ -1,28 +1,16 @@
-import React from 'react';
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectLinksItems } from "../../redux/links/links.selectors.js";
+import React from "react";
+import "./link-list.styles.scss";
 
-import './link-list.styles.scss';
+import LinkItem from "../link-item/link-item.component.jsx";
 
-import ListItem from '../link-item/link-item.component.jsx';
-
-const LinkList = (links) => (
-    <ul className='link-list'>
-    {console.log(links)}
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
+const LinkList =  ({ linksItems }) => {
+  return (
+    <ul className="link-list">
+      {linksItems.map(({id, ...otherProps}) => (
+        <LinkItem key={id} id={id} {...otherProps}></LinkItem>
+      ))}
     </ul>
-);
+  );
+};
 
-const mapStateToProps = state =>
-  createStructuredSelector({
-    links: selectLinksItems,
-  });
-
-
-export default connect(mapStateToProps,null)(LinkList);
+export default LinkList;
