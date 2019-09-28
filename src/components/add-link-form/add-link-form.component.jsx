@@ -1,38 +1,32 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { Button } from 'react-bootstrap';
 
 import "./add-link-form.styles.scss";
 
 import FormGroup from "../form-group/form-group.component.jsx";
-import CustomButton from "../custom-button/custom-button.component.jsx";
 
 import {
   selectDurationVisibility,
   selectInputStatesValues
 } from "../../redux/input/input.selectors.js";
-import { selectLinksItems } from "../../redux/links/links.selectors.js";
-import { toggleVisibility, updateInput, resetInput } from "../../redux/input/input.actions.js";
+import { toggleVisibility, updateInput } from "../../redux/input/input.actions.js";
 import { addLinkItem } from "../../redux/links/links.utils.js";
 
 
 const AddLinkForm = ({
   hidden,
-  linksItem,
   inputValues,
   toggleVisibility,
   updateInput,
   addLinkItem,
-  resetInput,
 }) => {
   const { url, title, author, date, width, height, duration } = inputValues;
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(linksItem);
-    console.log(inputValues);
-    addLinkItem(linksItem, inputValues);
-    resetInput();
+    addLinkItem(inputValues);
   };
 
 
@@ -119,24 +113,22 @@ const AddLinkForm = ({
           required
         ></FormGroup>
       ) : null}
-      <CustomButton type="submit" value="submit">
+      <Button type="submit">
         Ajouter le lien
-      </CustomButton>
+      </Button>
     </form>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
   toggleVisibility: visibility => dispatch(toggleVisibility(visibility)),
-  addLinkItem: (linksItems, link) => dispatch(addLinkItem(linksItems, link)),
+  addLinkItem: link => dispatch(addLinkItem(link)),
   updateInput: data => dispatch(updateInput(data)),
-  resetInput: () => dispatch(resetInput()),
 });
 
 const mapStateToProps = state =>
   createStructuredSelector({
     hidden: selectDurationVisibility,
-    linksItem: selectLinksItems,
     inputValues: selectInputStatesValues
   });
 

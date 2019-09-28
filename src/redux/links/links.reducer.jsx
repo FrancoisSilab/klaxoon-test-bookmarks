@@ -1,5 +1,5 @@
 import { LinksActionsTypes } from "./links.types.js";
-import { deleteLinkItem, addLinkItem } from "./links.utils.js"
+import { deleteLinkItem } from "./links.utils.js"
 
 const INITIAL_STATE = {
   linksItems: []
@@ -13,9 +13,10 @@ const linkReducer = (state = INITIAL_STATE, action) => {
         linksItems: action.payload
       };
       case LinksActionsTypes.ADD_LINK:
-      return {
+        state.linksItems.push(action.payload);
+        return {
         ...state,
-        linksItems: action.payload
+        linksItems: state.linksItems
       };
       case LinksActionsTypes.DELETE_LINK:
       return {

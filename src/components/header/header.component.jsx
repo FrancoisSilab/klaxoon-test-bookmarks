@@ -1,13 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Button } from 'react-bootstrap';
+
+import { toggleAdd } from '../../redux/modal/modal.actions.js';
 
 import './header.styles.scss';
 
-const Header = () => (
+const Header = ({ toggleAdd }) => (
     <nav className='header'>
-        <Link className="link" to='/'>List</Link>
-        <Link className="link" to='/add-link'>Add Links</Link>
+        <Button className="link" onClick={toggleAdd}>Add Links</Button>
     </nav>
 );
 
-export default Header;
+const mapDispatchToProps = dispatch => ({
+    toggleAdd: () => dispatch(toggleAdd()),
+});
+
+export default connect(null, mapDispatchToProps)(Header);

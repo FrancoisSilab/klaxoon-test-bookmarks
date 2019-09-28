@@ -1,5 +1,6 @@
 import { firestore } from "../../firebase/firebase.utils.js";
 import { fetchLinksItems, addLinkItemAction } from "./links.actions.js";
+import { resetInput } from "../input/input.actions";
 
 export const getLinksItems = () => {
   const links = [];
@@ -30,20 +31,18 @@ export const getLinksItems = () => {
   };
 };
 
-export const addLinkItem = (linksItems, link) => {
+export const addLinkItem = (link) => {
   return dispatch => {
     // On obtient la référence de la collection links
     const colRef = firestore.collection("links");
-    console.log(linksItems);
-    console.log(link);
     // On ajoute le nouveau linkItem comme nouveau document
     colRef
       .add(link)
       .then(function(docRef) {
         console.log("Document successfully written!");
         link["id"] = docRef.id;
-        linksItems.push(link);
-        dispatch(addLinkItemAction(linksItems));
+        dispatch(addLinkItemAction(link));
+        dispatch(resetInput());
       })
       .catch(function(error) {
         console.error("Error writing document: ", error);
